@@ -7,7 +7,7 @@ import {DepthOfField, EffectComposer} from "@react-three/postprocessing";
 
 function Orange({ z }){
     const ref = useRef()
-    const { nodes, materials } = useGLTF('/ring-transformed.glb')
+    const { nodes, materials } = useGLTF('/ring-v2-transformed.glb')
     const { viewport, camera } = useThree()
     const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z])
     const [data] = useState({
@@ -23,10 +23,11 @@ function Orange({ z }){
         if(data.y > height) data.y = -height
     })
 
-    return <mesh ref={ref} geometry={nodes.ring.geometry} material={materials.skin} />
+    return <mesh ref={ref} geometry={nodes.ring.geometry} material={materials.skin} scale={200}/>
+
 }
 
-export default function App({count = 10, depth = 80}) {
+export default function App({count = 100, depth = 80}) {
 
   return (
         <Canvas gl={{alpha : false}} camera={{near: 0.01, far: 110, fov: 30}}>
