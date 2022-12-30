@@ -18,16 +18,16 @@ function Orange({ z }){
         rZ : Math.random() * Math.PI,
     })
     useFrame((state) => {
-        ref.current.rotation.set((data.rX += 0.001), (data.rY -= 0.007), (data.rZ -= 0.002))
+        ref.current.rotation.set((data.rX += 0.01), (data.rY -= 0.015), (data.rZ -= 0.002))
         ref.current.position.set(data.x * width, (data.y += 0.02), z)
         if(data.y > height) data.y = -height
     })
 
-    return <mesh ref={ref} geometry={nodes.ring.geometry} material={materials.skin} scale={200}/>
+    return <mesh ref={ref} geometry={nodes.ring.geometry} material={materials.skin} scale={175}/>
 
 }
 
-export default function App({count = 100, depth = 80}) {
+export default function App({count = 70, depth = 70}) {
 
   return (
         <Canvas gl={{alpha : false}} camera={{near: 0.01, far: 110, fov: 30}}>
