@@ -29,7 +29,7 @@ function Orange({ z }){
 
 }
 
-export default function App({count = 70, depth = 70}) {
+export default function App({count = 100, depth = 70}) {
 
   return (
         <Canvas gl={{alpha : false}} camera={{near: 0.01, far: 110, fov: 30}} dpr={1}>
