@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, {Suspense, useRef, useState} from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import {Environment, useGLTF} from "@react-three/drei";
+import {Environment, Stats, useGLTF} from "@react-three/drei";
 import {DepthOfField, EffectComposer} from "@react-three/postprocessing";
 
 
@@ -17,6 +17,8 @@ function Orange({ z }){
         rY : Math.random() * Math.PI,
         rZ : Math.random() * Math.PI,
     })
+
+
     useFrame((state) => {
         ref.current.rotation.set((data.rX += 0.01), (data.rY -= 0.015), (data.rZ -= 0.002))
         ref.current.position.set(data.x * width, (data.y += 0.02), z)
@@ -30,7 +32,7 @@ function Orange({ z }){
 export default function App({count = 70, depth = 70}) {
 
   return (
-        <Canvas gl={{alpha : false}} camera={{near: 0.01, far: 110, fov: 30}}>
+        <Canvas gl={{alpha : false}} camera={{near: 0.01, far: 110, fov: 30}} dpr={1}>
             <color attach={"background"} args={["#e58739"]} />
             <ambientLight intensity={0.2} />
             <spotLight position={[10, 10, 10]} intensity={1} />
@@ -43,6 +45,7 @@ export default function App({count = 70, depth = 70}) {
                     <DepthOfField target={[0, 0, depth / 2]} focalLength={0.4} bokehScale={11} height={800}/>
                 </EffectComposer>
             </Suspense>
+            <Stats />
         </Canvas>
   )
 }
