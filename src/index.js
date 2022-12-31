@@ -1,0 +1,1 @@
+import './fonts/RoashePersonalUse-jEa4M.otf';

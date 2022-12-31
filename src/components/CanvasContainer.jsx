@@ -4,17 +4,33 @@ import {Environment, Stats} from "@react-three/drei";
 import Model from "./Model.jsx";
 import {DepthOfField, EffectComposer} from "@react-three/postprocessing";
 
-export default function CanvasContainer({count = 120, depth = 65}) {
+export default function CanvasContainer({count = 120, depth = 65, z}) {
 
     return (
-        <Canvas gl={{alpha : false}} camera={{near: 0.01, far: 110, fov: 30}} dpr={1}>
-          <color attach={"background"} args={["#e58739"]} />
+    <>
+        <div className="header">
+          <span className="active">HOME</span>
+          <span>ABOUT</span>
+          <span>CONTACT</span>
+        </div>
+        <div className="page-title">
+          <h2>A SIMPLE</h2>
+          <h1>LANDING PAGE</h1>
+        </div>
+        <div className="quote">
+          <p>"And some things that should not have been forgotten were lost. History became legend. Legend became myth. And for two and a half thousand years, the ring passed out of all knowledge."</p>
+        </div>
+        <Canvas className={"canvas"} gl={{alpha : false}} camera={{near: 0.01, far: 100, fov: 30}} dpr={1}>
+          <color attach={"background"} args={["rgba(150,127,111,0.45)"]} />
           <ambientLight intensity={0.2} />
-          <spotLight position={[10, 10, 10]} intensity={1} />
+          <spotLight position={[10, 10, 10]} intensity={0.10} />
           <Suspense fallback={null}>
-            <Environment preset={"sunset"} />
+            <Environment
+                preset={"forest"}
+                blur={1}
+            />
             {Array.from({ length : count}, (_, i) => (
-                <Model key={i} z={(-i / count) * depth - 25} />
+                <Model key={i} z={(-i / count) * depth - 17} />
             ))}
             <EffectComposer>
               <DepthOfField target={[0, 0, depth / 2]} focalLength={0.4} bokehScale={11} height={800}/>
@@ -22,6 +38,6 @@ export default function CanvasContainer({count = 120, depth = 65}) {
           </Suspense>
           <Stats />
         </Canvas>
-
+    </>
     )
   }
